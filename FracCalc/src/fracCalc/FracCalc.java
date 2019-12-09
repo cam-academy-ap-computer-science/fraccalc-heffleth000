@@ -43,20 +43,29 @@ public class FracCalc {
     	int space = input.indexOf(" "); //index of first space
     	int x = space + 3; //index of fraction after operator
     	String secondFrac = input.substring(x, length); //finds the second fraction
+    	String sfWhole = " ";
+    	String sfNumerator = " ";
+    	String sfDenominator = " ";
+    	int sfLength = secondFrac.length();	//length of secondFrac
+    	int sfUnderscore = secondFrac.indexOf("_"); //secondFrac's indexOf underscore
+    	int sfSlash = secondFrac.indexOf("/");	//secondFrac's indexOf slash
+    	if (sfUnderscore > 0) {
+    		sfWhole = secondFrac.substring(0, sfUnderscore);
+    		int convertedsfW = Integer.parseInt(sfWhole);
+    	}
+    	if (sfSlash > 0) {
+    		sfNumerator = secondFrac.substring(sfUnderscore + 1, sfSlash);
+    		int convertedsfN = Integer.parseInt(sfNumerator);
+    		sfDenominator = secondFrac.substring(sfSlash + 1, sfLength);
+    		int convertedsfD = Integer.parseInt(sfDenominator);
+    	}
+    	System.out.println("whole:" + sfWhole + " numerator:" + sfNumerator + " denominator:" + sfDenominator);
     	
-    	int sfUnderscore = secondFrac.indexOf("_"); //if secondFrac contains underscore
-    	int sfSlash = secondFrac.indexOf("/");
-    	if (sfUnderscore == -1) {
+    	if (sfUnderscore == -1 && sfSlash == -1) {
     		System.out.println("whole:" + secondFrac + " numerator:" + secondFrac + " denominator:1");
     	}
-    	else {
-    		String sfWhole = secondFrac.substring(x, sfUnderscore);
-    		String sfNumerator = secondFrac.substring(sfUnderscore, sfSlash );
-    		String sfDenominator = secondFrac.substring(sfSlash, length);
-    		//System.out.println(sfWhole);
-    		//System.out.println(sfNumerator);
-    		//System.out.println(sfDenominator);
-    		//System.out.println("whole:" + sfWhole + " numerator:" + sfNumerator + " denominator:" + sfDenominator);
+    	if (sfUnderscore == -1 && sfSlash > 0) {
+    		System.out.println("whole:" + 0 + " numerator:" + sfNumerator + " denominator:" + sfDenominator);
     	}
     	
     	String firstFrac = input.substring(0, space); //finds the first fraction
