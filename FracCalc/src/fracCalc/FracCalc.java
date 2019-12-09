@@ -8,6 +8,7 @@
  * in main method, ask for userInput until "quit" is typed
  * in produceAnswer() break up each fraction into whole number, numerator, and denominator
  * use if statement about underscores and slashes "/"
+ * produceAnswer("5_3/4 - 6_5/8") returns "whole:6 numerator:5 denominator:8"
  */
 
 // Equations to test:
@@ -26,13 +27,12 @@ public class FracCalc {
     		System.out.println("Program stopped");	//stops program
     	 }
     	while (!calc.equals("quit")) {
-    		produceAnswer(calc);
         	System.out.println(produceAnswer(calc)); //prints out the second fraction
         	System.out.print("What calculation should be performed? (type \"quit\" to stop) ");
         	calc = userInput.nextLine();
         	if (calc.equals("quit")) {		//stops program
         		System.out.println("Program stopped");
-        	 }
+        	}
     	}	
     	
     }
@@ -44,9 +44,19 @@ public class FracCalc {
     	int x = space + 3; //index of fraction after operator
     	String secondFrac = input.substring(x, length); //finds the second fraction
     	
-    	int underscore = secondFrac.indexOf("_");
-    	if (underscore == -1) {
-    		
+    	int sfUnderscore = secondFrac.indexOf("_"); //if secondFrac contains underscore
+    	int sfSlash = secondFrac.indexOf("/");
+    	if (sfUnderscore == -1) {
+    		System.out.println("whole:" + secondFrac + " numerator:" + secondFrac + " denominator:1");
+    	}
+    	else {
+    		String sfWhole = secondFrac.substring(x, sfUnderscore);
+    		String sfNumerator = secondFrac.substring(sfUnderscore, sfSlash );
+    		String sfDenominator = secondFrac.substring(sfSlash, length);
+    		//System.out.println(sfWhole);
+    		//System.out.println(sfNumerator);
+    		//System.out.println(sfDenominator);
+    		//System.out.println("whole:" + sfWhole + " numerator:" + sfNumerator + " denominator:" + sfDenominator);
     	}
     	
     	String firstFrac = input.substring(0, space); //finds the first fraction
@@ -55,8 +65,6 @@ public class FracCalc {
     	
         return secondFrac;
     }
-
-    // TODO: Fill in the space below with any helper methods that you think you will need
     
 }
 //** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
