@@ -90,31 +90,42 @@ public class FracCalc {
     	String sfW = " ";
     	String sfN = " ";
     	String sfD = " ";
-    	
+    	int convertedsfW = 0;
+    	int convertedsfN = 0;
+    	int convertedsfD = 0;
     	int sfLength = secondFrac.length();	//length of secondFrac
     	int sfUnderscore = secondFrac.indexOf("_"); //secondFrac's indexOf underscore
     	int sfSlash = secondFrac.indexOf("/");	//secondFrac's indexOf slash
-		
+    	
+    	sfW = secondFrac.substring(0, sfUnderscore);
+		convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
+		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
+		convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
+		sfD = secondFrac.substring(sfSlash + 1);
+		convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
+    	
     	if (sfUnderscore > 0 && sfSlash > 0) {
     		sfW = secondFrac.substring(0, sfUnderscore);
-    		int convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
+    		convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
     		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
-    		int convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
-    		sfD = secondFrac.substring(sfSlash + 1, sfLength);
-    		int convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
+    		convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
+    		sfD = secondFrac.substring(sfSlash + 1);
+    		convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
     		secondFrac = "whole:" + convertedsfW + " numerator:" + convertedsfN + " denominator:" + convertedsfD;
     	}
     	if (sfUnderscore == -1 && sfSlash == -1) {
-    		secondFrac = "whole:" + secondFrac + " numerator:" + 0 + " denominator:1";
+    		sfW = secondFrac.substring(0);
+			convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
+    		secondFrac = "whole:" + convertedsfW + " numerator:" + 0 + " denominator:1";
     	}
     	if (sfUnderscore == -1 && sfSlash > 0) {
     		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
-    		int convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
-    		sfD = secondFrac.substring(sfSlash + 1, sfLength);
-    		int convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
+			convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
+			sfD = secondFrac.substring(sfSlash + 1);
+			convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
     		secondFrac = "whole:" + 0 + " numerator:" + convertedsfN + " denominator:" + convertedsfD;
     	}
-    
+		//System.out.println(convertedsfW + " " + convertedsfN + " " + convertedsfD);
     	String operator = input.substring(space, space + 2); //finds the operator
     	
         return secondFrac;
