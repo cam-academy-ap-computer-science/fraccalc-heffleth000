@@ -60,6 +60,9 @@ public class FracCalc {
     	String ffW = " ";
     	String ffN = " ";
     	String ffD = " ";
+    	int convertedffW = 0;
+    	int convertedffN = 0;
+    	int convertedffD = 0;
     	
     	int ffLength = firstFrac.length();	//length of firstFrac
     	int ffUnderscore = firstFrac.indexOf("_"); //firstFrac's indexOf underscore
@@ -67,65 +70,60 @@ public class FracCalc {
 		
     	if (ffUnderscore > 0 && ffSlash > 0) {
     		ffW = firstFrac.substring(0, ffUnderscore);
-    		int convertedffW = Integer.parseInt(ffW);	//converts to ffWhole to int
+    		convertedffW = Integer.parseInt(ffW);	//converts to ffWhole to int
     		ffN = firstFrac.substring(ffUnderscore + 1, ffSlash);
-    		int convertedffN = Integer.parseInt(ffN);	//converts ffNumerator to int
+    		convertedffN = Integer.parseInt(ffN);	//converts ffNumerator to int
     		ffD = firstFrac.substring(ffSlash + 1, ffLength);
-    		int convertedffD = Integer.parseInt(ffD);	//converts ffDenominator to int
-    		//firstFrac = "whole:" + convertedffW + " numerator:" + convertedffN + " denominator:" + convertedffD;
+    		convertedffD = Integer.parseInt(ffD);	//converts ffDenominator to int
+    		firstFrac = "whole:" + convertedffW + " numerator:" + convertedffN + " denominator:" + convertedffD;
     	}
     	if (ffUnderscore == -1 && ffSlash == -1) {
-    		//firstFrac = "whole:" + firstFrac + " numerator:" + 0 + " denominator:1";
+    		firstFrac = "whole:" + firstFrac + " numerator:" + 0 + " denominator:1";
     	}
     	if (ffUnderscore == -1 && ffSlash > 0) {
-    		ffN = firstFrac.substring(ffUnderscore + 1, ffSlash);
-    		int convertedffN = Integer.parseInt(ffN);	//converts ffNumerator to int
-    		ffD = firstFrac.substring(ffSlash + 1, ffLength);
-    		int convertedffD = Integer.parseInt(ffD);	//converts ffDenominator to int
-    		//firstFrac = "whole:" + 0 + " numerator:" + convertedffN + " denominator:" + convertedffD;
+    		ffN = firstFrac.substring(0, ffSlash);
+    		convertedffN = Integer.parseInt(ffN);	//converts ffNumerator to int
+    		ffD = firstFrac.substring(ffSlash + 1);
+    		convertedffD = Integer.parseInt(ffD);	//converts ffDenominator to int
+    		firstFrac = "whole:" + 0 + " numerator:" + convertedffN + " denominator:" + convertedffD;
     	}
     	
     	int x = space + 3; //index of fraction after operator
     	String secondFrac = input.substring(x, length); //finds the second fraction
+    	
     	String sfW = " ";
     	String sfN = " ";
     	String sfD = " ";
     	int convertedsfW = 0;
     	int convertedsfN = 0;
     	int convertedsfD = 0;
+    	
     	int sfLength = secondFrac.length();	//length of secondFrac
     	int sfUnderscore = secondFrac.indexOf("_"); //secondFrac's indexOf underscore
     	int sfSlash = secondFrac.indexOf("/");	//secondFrac's indexOf slash
     	
-    	sfW = secondFrac.substring(0, sfUnderscore);
-		convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
-		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
-		convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
-		sfD = secondFrac.substring(sfSlash + 1);
-		convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
-    	
-    	if (sfUnderscore > 0 && sfSlash > 0) {
+    	if (sfUnderscore > 0 && sfSlash > 0) {	//mixed number
     		sfW = secondFrac.substring(0, sfUnderscore);
     		convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
     		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
     		convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
     		sfD = secondFrac.substring(sfSlash + 1);
-    		convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
+    		convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int 
     		secondFrac = "whole:" + convertedsfW + " numerator:" + convertedsfN + " denominator:" + convertedsfD;
     	}
-    	if (sfUnderscore == -1 && sfSlash == -1) {
-    		sfW = secondFrac.substring(0);
+    	if (sfUnderscore == -1 && sfSlash == -1) {	//whole number
+    		sfW = secondFrac;
 			convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
-    		secondFrac = "whole:" + convertedsfW + " numerator:" + 0 + " denominator:1";
+    		secondFrac = "whole:" + convertedsfW + " numerator:0 denominator:1";
     	}
-    	if (sfUnderscore == -1 && sfSlash > 0) {
+    	if (sfUnderscore == -1 && sfSlash > 0) {	//only fraction
     		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
 			convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
 			sfD = secondFrac.substring(sfSlash + 1);
 			convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
     		secondFrac = "whole:" + 0 + " numerator:" + convertedsfN + " denominator:" + convertedsfD;
     	}
-		//System.out.println(convertedsfW + " " + convertedsfN + " " + convertedsfD);
+    	
     	String operator = input.substring(space, space + 2); //finds the operator
     	
         return secondFrac;
@@ -134,57 +132,4 @@ public class FracCalc {
     
 }
 
-/*	passed checkpoint 2
-    	if (sfUnderscore > 0 && sfSlash > 0) {
-    		sfW = secondFrac.substring(0, sfUnderscore);
-    		int convertedsfW = Integer.parseInt(sfW);	//converts to sfWhole to int
-    		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
-    		int convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
-    		sfD = secondFrac.substring(sfSlash + 1, sfLength);
-    		int convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
-    		secondFrac = "whole:" + convertedsfW + " numerator:" + convertedsfN + " denominator:" + convertedsfD;
-    	}
-    	if (sfUnderscore == -1 && sfSlash == -1) {
-    		secondFrac = "whole:" + secondFrac + " numerator:" + 0 + " denominator:1";
-    	}
-    	if (sfUnderscore == -1 && sfSlash > 0) {
-    		sfN = secondFrac.substring(sfUnderscore + 1, sfSlash);
-    		int convertedsfN = Integer.parseInt(sfN);	//converts sfNumerator to int
-    		sfD = secondFrac.substring(sfSlash + 1, sfLength);
-    		int convertedsfD = Integer.parseInt(sfD);	//converts sfDenominator to int
-    		secondFrac = "whole:" + 0 + " numerator:" + convertedsfN + " denominator:" + convertedsfD;
-    	}
-    	*/
 
-/*public static String firstFraction(String input) {
-    	int space = input.indexOf(" "); //index of first space
-    	String firstFrac = input.substring(0, space); //finds the first fraction
-    	String ffW = " ";
-    	String ffN = " ";
-    	String ffD = " ";
-    	
-    	int ffLength = firstFrac.length();	//length of firstFrac
-    	int ffUnderscore = firstFrac.indexOf("_"); //firstFrac's indexOf underscore
-    	int ffSlash = firstFrac.indexOf("/");	//firstFrac's indexOf slash
-		
-    	if (ffUnderscore > 0 && ffSlash > 0) {
-    		ffW = firstFrac.substring(0, ffUnderscore);
-    		int convertedffW = Integer.parseInt(ffW);	//converts to ffWhole to int
-    		ffN = firstFrac.substring(ffUnderscore + 1, ffSlash);
-    		int convertedffN = Integer.parseInt(ffN);	//converts ffNumerator to int
-    		ffD = firstFrac.substring(ffSlash + 1, ffLength);
-    		int convertedffD = Integer.parseInt(ffD);	//converts ffDenominator to int
-    		firstFrac = "whole:" + convertedffW + " numerator:" + convertedffN + " denominator:" + convertedffD;
-    	}
-    	if (ffUnderscore == -1 && ffSlash == -1) {
-    		firstFrac = "whole:" + firstFrac + " numerator:" + 0 + " denominator:1";
-    	}
-    	if (ffUnderscore == -1 && ffSlash > 0) {
-    		ffN = firstFrac.substring(ffUnderscore + 1, ffSlash);
-    		int convertedffN = Integer.parseInt(ffN);	//converts ffNumerator to int
-    		ffD = firstFrac.substring(ffSlash + 1, ffLength);
-    		int convertedffD = Integer.parseInt(ffD);	//converts ffDenominator to int
-    		firstFrac = "whole:" + 0 + " numerator:" + convertedffN + " denominator:" + convertedffD;
-    	}
-    	return firstFrac;
-    } */
