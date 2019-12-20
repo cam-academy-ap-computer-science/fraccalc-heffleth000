@@ -13,8 +13,10 @@
  * produceAnswer("5_3/4 - 6_5/8") returns "whole:6 numerator:5 denominator:8"
  * 
  * CHECKPOINT 3:
- * create while loops for different operators and then use if statements within for underscores and slashes
- * eg: while (calc.contains("+")) {
+ * create while loops for different operators
+ * CREATE NEW METHOD FOR EACH OPERATOR (inside while loops)
+ * use if statements for each situation with underscores and slashes
+ * eg: public static void addition(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD) {
  * 			finalW = convertedffW + convertedsfW;
  * 			if ((firstFrac.contains("_") && firstFrac.contains("/")) && (secondFrac.contains("_") && secondFrac.contains("/") {
  * 				finalN = convertedffN + convertedsfN;
@@ -38,7 +40,7 @@ public class FracCalc {
     	String calc = userInput.nextLine();
     	if (calc.equals("quit")) {
     		System.out.println("Program stopped");	//stops program
-    	 }
+    	}
     	while (!calc.equals("quit")) {
         	System.out.println(produceAnswer(calc)); //prints out the second fraction
         	System.out.print("What calculation should be performed? (type \"quit\" to stop) ");
@@ -53,8 +55,7 @@ public class FracCalc {
     
     public static String produceAnswer(String input) {
     	int length = input.length(); //length of input; is end of string
-    	int space = input.indexOf(" "); //index of first space
-    	
+    	int space = input.indexOf(" "); //index of first space    	
     	
     	String firstFrac = input.substring(0, space); //finds the first fraction
     	String ffW = " ";
@@ -126,10 +127,23 @@ public class FracCalc {
     	
     	String operator = input.substring(space, space + 2); //finds the operator
     	
+ 
+    	
+    	if (operator.contains("+")) {
+    		add(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD);
+    	}
+    	
         return secondFrac;
+    
+    
+    public static String add(int convertedffW, int convertedffN, int convertedffD, int convertedsfW, int convertedsfN, int convertedsfD) {
+    	/* multiply fractions by each other's denom to create common denom
+    	 * add together improper fracs
+    	 * find common factor and reduce
+    	 */
     }
     
-    
+}
 }
 
 
