@@ -159,27 +159,36 @@ public class FracCalc {
     	String answer = " ";
     	int finalW = 0;
     	int finalN = 0;
-    	int finalD = 0;
+    	int finalD = 1;
     	
     	int newffN = 0;
     	int newsfN = 0;
-    	int newffD = 0;
-    	int newsfD = 0;
+    	int newffD = 1;
+    	int newsfD = 1;
     	int commonD = 0;
     	
-    	if (cffN != 0 && csfN != 0) {		//both have fractions
-    		newffN = ((cffW * cffD) + cffN) * csfD;
-    		newsfN = ((csfW * csfD) + csfN) * cffD;
-        	commonD = cffD * csfD;
+    	
+    	if (cffN == 0) {
+    		cffN = cffW;
+    		cffD = newffD;
     	}
-    	if (cffN != 0 && csfN == 0) {		//second frac is whole number
+    	if (csfN == 0) {
+    		csfN = csfW;
+    		csfD = newsfN;
+    	}
+    	
+    	newffN = ((cffW * cffD) + cffN) * csfD;
+    	newsfN = ((csfW * csfD) + csfN) * cffD;
+        commonD = cffD * csfD;
+    	
+    	/*if (cffN != 0 && csfN == 0) {		//second frac is whole number
     		newffN = ((cffW * cffD) + cffN) + (csfW * cffD);
     		commonD = cffD;
     	}
     	if (cffN == 0 && csfN != 0) {		//first frac is a whole number
     		newsfN = ((csfW * csfD) + csfN) + (cffW * csfD);
     		commonD = csfD;
-    	}
+    	}*/
     	
     	finalN = newffN + newsfN;
     	finalD = commonD;
@@ -349,7 +358,7 @@ public class FracCalc {
     	
     	
     	if (newffN != 0 && newsfN != 0) {
-    		finalN = newffN * newsfD;
+    		finalN = (newffN * newsfD) ;
     		finalD = commonD;
     	}
     	if (newffN != 0 && newsfN == 0) {
