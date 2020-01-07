@@ -134,6 +134,7 @@ public class FracCalc {
     	}
     	
         return secondFrac;
+    }
     
     
     public static String add(int convertedffW, int convertedffN, int convertedffD, int convertedsfW, int convertedsfN, int convertedsfD) {
@@ -143,8 +144,8 @@ public class FracCalc {
     	 */
     }
     
-    
 }
+
 
 
 
