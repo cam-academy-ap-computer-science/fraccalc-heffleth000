@@ -13,10 +13,8 @@
  * produceAnswer("5_3/4 - 6_5/8") returns "whole:6 numerator:5 denominator:8"
  * 
  * CHECKPOINT 3:
- * create while loops for different operators
- * CREATE NEW METHOD FOR EACH OPERATOR (inside while loops)
- * use if statements for each situation with underscores and slashes
- * eg: public static void addition(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD) {
+ * create while loops for different operators and then use if statements within for underscores and slashes
+ * eg: while (calc.contains("+")) {
  * 			finalW = convertedffW + convertedsfW;
  * 			if ((firstFrac.contains("_") && firstFrac.contains("/")) && (secondFrac.contains("_") && secondFrac.contains("/") {
  * 				finalN = convertedffN + convertedsfN;
@@ -40,7 +38,7 @@ public class FracCalc {
     	String calc = userInput.nextLine();
     	if (calc.equals("quit")) {
     		System.out.println("Program stopped");	//stops program
-    	}
+    	 }
     	while (!calc.equals("quit")) {
         	System.out.println(produceAnswer(calc)); //prints out the second fraction
         	System.out.print("What calculation should be performed? (type \"quit\" to stop) ");
@@ -55,7 +53,8 @@ public class FracCalc {
     
     public static String produceAnswer(String input) {
     	int length = input.length(); //length of input; is end of string
-    	int space = input.indexOf(" "); //index of first space    	
+    	int space = input.indexOf(" "); //index of first space
+    	
     	
     	String firstFrac = input.substring(0, space); //finds the first fraction
     	String ffW = " ";
@@ -126,26 +125,278 @@ public class FracCalc {
     	}
     	
     	String operator = input.substring(space, space + 2); //finds the operator
-    	
- 
+    	String answer = " ";
     	
     	if (operator.contains("+")) {
-    		add(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD);
+    		answer = add(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD);
+    		return answer;
     	}
     	
-        return secondFrac;
+    	if (operator.contains("-")) {
+    		answer = sub(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD);
+    		return answer;
+    	}
+    	
+    	if (operator.contains("*")) {
+    		answer = mult(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD);
+    		return answer;
+    	}
+    	
+    	if (operator.contains("/")) {
+    		answer = div(convertedffW, convertedffN, convertedffD, convertedsfW, convertedsfN, convertedsfD);
+    		return answer;
+    	}
+    	
+    	return answer;
     }
     
     
-    public static String add(int convertedffW, int convertedffN, int convertedffD, int convertedsfW, int convertedsfN, int convertedsfD) {
+    public static String add(int cffW, int cffN, int cffD, int csfW, int csfN, int csfD) {
     	/* multiply fractions by each other's denom to create common denom
     	 * add together improper fracs
     	 * find common factor and reduce
-    	 */
+    	 */	
+    	String answer = " ";
+    	int finalW = 0;
+    	int finalN = 0;
+    	int finalD = 0;
+    	
+    	int newffN = 0;
+    	int newsfN = 0;
+    	int newffD = 0;
+    	int newsfD = 0;
+    	int commonD = 0;
+    	
+    	if (cffN != 0 && csfN != 0) {		//both have fractions
+    		newffN = ((cffW * cffD) + cffN) * csfD;
+    		newsfN = ((csfW * csfD) + csfN) * cffD;
+        	commonD = cffD * csfD;
+    	}
+    	if (cffN != 0 && csfN == 0) {		//second frac is whole number
+    		newffN = ((cffW * cffD) + cffN) + (csfW * cffD);
+    		commonD = cffD;
+    	}
+    	if (cffN == 0 && csfN != 0) {		//first frac is a whole number
+    		newsfN = ((csfW * csfD) + csfN) + (cffW * csfD);
+    		commonD = csfD;
+    	}
+    	
+    	finalN = newffN + newsfN;
+    	finalD = commonD;
+    	
+    	
+    	
+    	
+    	//in this space convert fraction back into a mixed number
+    	
+    	
+    	
+    	
+    	if (finalW == 0) {		//if there is no whole numbers
+    		answer = finalN + "/" + finalD;
+    	}
+    	if (finalN == 0) {		//if a whole number
+    		answer = Integer.toString(finalW);
+    	}
+    	if (finalW != 0 && finalN != 0) {		//if a mixed fraction
+    		answer = finalW + "_" + finalN + "/" + finalD;
+    	}
+    	
+    	return answer;
+    }
+    
+    public static String sub(int cffW, int cffN, int cffD, int csfW, int csfN, int csfD) {
+    	String answer = " ";
+    	int finalW = 0;
+    	int finalN = 0;
+    	int finalD = 0;
+    	
+    	int newffN = 0;
+    	int newsfN = 0;
+    	int newffD = 0;
+    	int newsfD = 0;
+    	int commonD = 0;
+    	
+    	if (cffN != 0 && csfN != 0) {		//both have fractions
+    		newffN = ((cffW * cffD) + cffN) * csfD;
+    		newsfN = ((csfW * csfD) + csfN) * cffD;
+        	commonD = cffD * csfD;
+    	}
+    	if (cffN != 0 && csfN == 0) {		//second frac is whole number
+    		newffN = ((cffW * cffD) + cffN) + (csfW * cffD);
+    		commonD = cffD;
+    	}
+    	if (cffN == 0 && csfN != 0) {		//first frac is a whole number
+    		newsfN = ((csfW * csfD) + csfN) + (cffW * csfD);
+    		commonD = csfD;
+    	}
+    	
+    	
+    	finalN = newffN - newsfN;
+    	finalD = commonD;
+    	
+    	
+    	
+    	//in this space convert fraction back into a mixed number
+    	
+    	
+    	
+    	
+    	
+    	
+    	if (finalW == 0) {		//if there is no whole numbers
+    		answer = finalN + "/" + finalD;
+    	}
+    	if (finalN == 0) {		//if a whole number
+    		answer = Integer.toString(finalW);
+    	}
+    	if (finalW != 0 && finalN != 0) {		//if a mixed fraction
+    		answer = finalW + "_" + finalN + "/" + finalD;
+    	}
+    	
+    	return answer;
+    }
+    
+    public static String mult(int cffW, int cffN, int cffD, int csfW, int csfN, int csfD) {
+    	String answer = " ";
+    	int finalW = 0;
+    	int finalN = 0;
+    	int finalD = 0;
+    	
+    	int newffN = 0;
+    	int newsfN = 0;
+    	int newffD = 0;
+    	int newsfD = 0;
+    	int commonD = 0;
+    	
+    	if (cffN != 0 && csfN != 0) {		//both have fractions
+    		newffN = ((cffW * cffD) + cffN);
+    		newsfN = ((csfW * csfD) + csfN);
+        	commonD = cffD * csfD;
+    	}
+    	if (cffN != 0 && csfN == 0) {		//second frac is whole number
+    		newffN = ((cffW * cffD) + cffN);
+    		newsfN = csfW;
+    		commonD = cffD;
+    	}
+    	if (cffN == 0 && csfN != 0) {		//first frac is a whole number
+    		newsfN = ((csfW * csfD) + csfN);
+    		newffN = cffW;
+    		commonD = csfD;
+    	}
+    	
+    
+    	if (cffN != 0 && csfN != 0) {		//if both are fractions
+    		finalN = newffN * newsfN;
+    		finalD = commonD;
+    	}
+    	if (cffN != 0 && csfN == 0) {		//if only first is fraction, second is whole
+    		finalN = newffN * newsfN;
+    		finalD = commonD;
+    	}
+    	if (cffN == 0 && csfN != 0) {		//if only second is fraction, first is whole
+    		finalN = newffN * newsfN;
+    		finalD = commonD;
+    	}
+    	
+    	
+    	//in this space convert fraction back into a mixed number
+    	
+    	
+    	
+    	
+    	
+    	if (finalW == 0) {		//if there is no whole numbers
+    		answer = finalN + "/" + finalD;
+    	}
+    	if (finalN == 0) {		//if a whole number
+    		answer = Integer.toString(finalW);
+    	}
+    	if (finalW != 0 && finalN != 0) {		//if a mixed fraction
+    		answer = finalW + "_" + finalN + "/" + finalD;
+    	}
+    	
+    	return answer;
+    }
+    
+    public static String div(int cffW, int cffN, int cffD, int csfW, int csfN, int csfD) {
+    	String answer = " ";
+    	int finalW = 0;
+    	int finalN = 0;
+    	int finalD = 0;
+    	
+    	int newffN = 0;
+    	int newsfN = 0;
+    	int newffD = 0;
+    	int newsfD = 0;
+    	int commonD = 0;
+    	
+    	if (cffN != 0 && csfN != 0) {		//both have fractions
+    		newffN = ((cffW * cffD) + cffN);
+    		newsfN = ((csfW * csfD) + csfN);
+        	commonD = cffD * csfD;
+    	}
+    	if (cffN != 0 && csfN == 0) {		//second frac is whole number
+    		newffN = ((cffW * cffD) + cffN);
+    		newsfN = csfW;
+    		commonD = cffD;
+    	}
+    	if (cffN == 0 && csfN != 0) {		//first frac is a whole number
+    		newsfN = ((csfW * csfD) + csfN);
+    		newffN = cffW;
+    		commonD = csfD;
+    	}
+    	
+    	
+    	if (newffN != 0 && newsfN != 0) {
+    		finalN = newffN * newsfD;
+    		finalD = commonD;
+    	}
+    	if (newffN != 0 && newsfN == 0) {
+    		finalN = newffN;
+    		finalD = commonD;
+    	}
+    	if (newffN == 0 && newsfN != 0) {
+    		finalN = newsfN;
+    		finalD = commonD;
+    	}
+    	
+    	
+    	
+    	
+    	//in this space convert fraction back into a mixed number
+    	
+    	
+    	
+    	if (finalW == 0) {		//if there is no whole numbers
+    		answer = finalN + "/" + finalD;
+    	}
+    	if (finalN == 0) {		//if a whole number
+    		answer = Integer.toString(finalW);
+    	}
+    	if (finalW != 0 && finalN != 0) {		//if a mixed fraction
+    		answer = finalW + "_" + finalN + "/" + finalD;
+    	}
+    	
+    	return answer;
     }
     
 }
+    
+    
+
+    	
 
 
+    
+
+//** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
+// This function takes a String 'input' and produces the result
+//
+// input is a fraction string that needs to be evaluated.  For your program, this will be the user input.
+//      e.g. input ==> "1/2 + 3/4"
+//        
+// The function should return the result of the fraction after it has been calculated
+//      e.g. return ==> "1_1/4"
 
 
