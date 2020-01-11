@@ -207,15 +207,8 @@ public class FracCalc {
     		commonD = csfD;
     	}
     	
-    	System.out.println("cffW csfW: " + cffW + " " + csfW);
-    	System.out.println("cffN csfN newffN newsfN: " + cffN + " " + csfN + " " + newffN + " " + newsfN);
-    	System.out.println("cffD csfD newffD newsfD commonD: " + cffD + " " + csfD + " " + newffD + " " + newsfD + " " + commonD);
-    	
-    	
     	finalN = newffN + newsfN;
     	finalD = commonD;
-    	
-    	System.out.println("finalN and finalD: " + finalN + " " + finalD);
     	
     	//reduce fraction here
     	
@@ -232,7 +225,7 @@ public class FracCalc {
     	if (reducedW >= 0 && reducedN < 0) {
     		reducedN *= -1;
     	}
-    	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
+    	
     	for (int i = reducedN; i > 0; i--) {
 			if((reducedN % i == 0) && (finalD % i == 0)) {
 				reducedN = reducedN / i;
@@ -241,11 +234,6 @@ public class FracCalc {
 				break;
 			}
 		}
-    	
-    	
-    	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
-    	
-    	
 	
     	if (reducedW == 0) {		//if there are no whole numbers
     		answer = reducedN + "/" + reducedD;
@@ -313,16 +301,8 @@ public class FracCalc {
     		commonD = csfD;
     	}
     	
-    	System.out.println("cffW csfW: " + cffW + " " + csfW);
-    	System.out.println("cffN csfN newffN newsfN: " + cffN + " " + csfN + " " + newffN + " " + newsfN);
-    	System.out.println("cffD csfD newffD newsfD commonD: " + cffD + " " + csfD + " " + newffD + " " + newsfD + " " + commonD);
-    	
-    	
     	finalN = newffN - newsfN;
     	finalD = commonD;
-    	
-    	System.out.println("finalN and finalD: " + finalN + " " + finalD);
-    	
     	
     	//in this space convert fraction back into a mixed number
 
@@ -332,14 +312,13 @@ public class FracCalc {
     	} else {
     		reducedW = 0;
     	}
-    	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
+    	
     	if (reducedW < 0) {
     		reducedN *= -1;
     	}
     	if (reducedW >= 0 && reducedN < 0) {
     		reducedN *= -1;
     	}
-    	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
     	
     	for (int i = reducedN; i > 0; i--) {
 			if((reducedN % i == 0) && (finalD % i == 0)) {
@@ -354,8 +333,6 @@ public class FracCalc {
     		reducedN *= -1;
     	}
     	
-    	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
-	
     	if (reducedW == 0) {		//if there are no whole numbers
     		answer = reducedN + "/" + reducedD;
     	}
@@ -369,7 +346,6 @@ public class FracCalc {
     	return answer;
     }
 
-    
     public static String mult(int cffW, int cffN, int cffD, int csfW, int csfN, int csfD) {
     	String answer = " ";
     	int finalW = 0;
@@ -430,12 +406,6 @@ public class FracCalc {
     		newffN = cffW;
     		commonD = csfD;
     	}
-    	
-    	System.out.println("cffW csfW: " + cffW + " " + csfW);
-    	System.out.println("cffN csfN newffN newsfN: " + cffN + " " + csfN + " " + newffN + " " + newsfN);
-    	System.out.println("cffD csfD newffD newsfD commonD: " + cffD + " " + csfD + " " + newffD + " " + newsfD + " " + commonD);
-    	
-    	
     
     	if (cffN != 0 && csfN != 0) {		//if both are fractions
     		finalN = newffN * newsfN;
@@ -449,8 +419,6 @@ public class FracCalc {
     		finalN = newffN * newsfN;
     		finalD = commonD;
     	}
-    	
-    	System.out.println("finalN and finalD: " + finalN + " " + finalD);
     	
     	//in this space convert fraction back into a mixed number
     	
@@ -467,7 +435,7 @@ public class FracCalc {
     	if (reducedW >= 0 && reducedN < 0) {
     		reducedN *= -1;
     	}
-    	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
+    	
     	for (int i = reducedN; i > 0; i--) {
 			if((reducedN % i == 0) && (finalD % i == 0)) {
 				reducedN = reducedN / i;
@@ -477,10 +445,6 @@ public class FracCalc {
 			}
 		}
     	
-    	
-    	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
-    	
-	
     	if (reducedW == 0) {		//if there are no whole numbers
     		answer = reducedN + "/" + reducedD;
     	}
@@ -561,12 +525,6 @@ public class FracCalc {
     	} else {
     		commonD = newffD * newsfN;
     	}
-    		
-    	
-    	System.out.println("cffW csfW: " + cffW + " " + csfW);
-    	System.out.println("cffN csfN newffN newsfN: " + cffN + " " + csfN + " " + newffN + " " + newsfN);
-    	System.out.println("cffD csfD newffD newsfD commonD: " + cffD + " " + csfD + " " + newffD + " " + newsfD + " " + commonD);
-    	
     	
     	if (newffN != 0 && newsfN != 0) {
     		finalN = (newffN * newsfD) ;
@@ -582,8 +540,6 @@ public class FracCalc {
     		finalD = csfW;
     	}
 
-    	System.out.println("finalN and finalD: " + finalN + " " + finalD);
-    	
     	//in this space convert fraction back into a mixed number
 
     	if (finalD != 0) {
@@ -602,7 +558,7 @@ public class FracCalc {
     	if(reducedW != 0 && reducedN < 0) {
     		reducedN *= -1;
     	}
-    	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
+    	
     	for (int i = reducedN; i > 0; i--) {
 			if((reducedN % i == 0) && (finalD % i == 0)) {
 				reducedN = reducedN / i;
@@ -622,10 +578,6 @@ public class FracCalc {
     	if (finalD < 0 && reducedN >= 0 && reducedW == 0) {
     		reducedN *= -1;
     	}
-    	
-    	
-    	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
-    	
 
     	if (reducedW == 0) {		//if there are no whole numbers
     		answer = reducedN + "/" + reducedD;
@@ -641,30 +593,5 @@ public class FracCalc {
     }
     
 }
-    
-    
-
-    	
-
-
-    
-
-//** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
-// This function takes a String 'input' and produces the result
-//
-// input is a fraction string that needs to be evaluated.  For your program, this will be the user input.
-//      e.g. input ==> "1/2 + 3/4"
-//        
-// The function should return the result of the fraction after it has been calculated
-//      e.g. return ==> "1_1/4"
-
-
-
-
-
-
-
-
-
 
 
