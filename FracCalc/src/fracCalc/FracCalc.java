@@ -289,25 +289,31 @@ public class FracCalc {
         	commonD = cffD * csfD;
     	}
     	if (cffN != 0 && csfN == 0) {		//second frac is whole number
+    		csfD = 1;
+    		csfN = csfW;
     		if (cffW >= 0) {
-    			newffN = ((cffW * cffD) + cffN) + (csfW * cffD);
+    			newffN = (cffW * cffD) + cffN;
     		} else {
-    			newffN = ((cffW * cffD) - cffN) + (csfW * cffD);
+    			newffN = (cffW * cffD) - cffN;
     		}
-    		
+    		newsfN = csfN * cffD;
     		commonD = cffD;
     	}
     	if (cffN == 0 && csfN != 0) {		//first frac is a whole number
+    		cffD = 1;
+    		cffN = cffW;
     		if (csfW >= 0) {
-    			newsfN = ((csfW * csfD) + csfN) + (cffW * csfD);
+    			newsfN = (csfW * csfD) + csfN;
+    		} else {
+    			newsfN = (csfW * csfD) - csfN;
     		}
-    		
+    		newffN = cffN * csfD;
     		commonD = csfD;
     	}
     	
     	finalN = newffN - newsfN;
     	finalD = commonD;
-    	
+    	System.out.println("newffN newsfN finalN commonD: " + newffN + " " + newsfN + " " + finalN + " " + commonD);
     	//in this space convert fraction back into a mixed number
 
     	if (finalD != 0) {
