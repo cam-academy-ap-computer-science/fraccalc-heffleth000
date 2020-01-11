@@ -38,7 +38,7 @@ public class FracCalc {
     	String calc = userInput.nextLine();
     	if (calc.equals("quit")) {
     		System.out.println("Program stopped");	//stops program
-    	 }
+    	}
     	while (!calc.equals("quit")) {
         	System.out.println(produceAnswer(calc)); //prints out the second fraction
         	System.out.print("What calculation should be performed? (type \"quit\" to stop) ");
@@ -168,6 +168,11 @@ public class FracCalc {
     	int commonD = 0;
     	
     	
+    	if (cffN == 0 && csfN == 0) {
+    		answer = Integer.toString(cffW + csfW);
+    		return answer;
+    	}
+    	
     	if (cffN != 0 && csfN != 0) {		//both have fractions
     		if (cffW >= 0)	{
     			newffN = ((cffW * cffD) + cffN) * csfD;       		
@@ -237,9 +242,7 @@ public class FracCalc {
 			}
 		}
     	
-    	if (finalN < 0) {
-    		reducedN *= -1;
-    	}
+    	
     	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
     	
     	
@@ -273,6 +276,11 @@ public class FracCalc {
     	int newsfD = 1;
     	int commonD = 1;
     	
+    	if (cffN == 0 && csfN == 0) {
+    		answer = Integer.toString(cffW - csfW);
+    		return answer;
+    	}
+    	
     	if (cffN != 0 && csfN != 0) {		//both have fractions
     		if (cffW >= 0) {
     			newffN = ((cffW * cffD) + cffN) * csfD;
@@ -283,7 +291,7 @@ public class FracCalc {
     		if (csfW >= 0) {
     			newsfN = ((csfW * csfD) + csfN) * cffD;
     		} else {
-    			newsfN = ((csfW * csfD) + csfN) * cffD;
+    			newsfN = ((csfW * csfD) - csfN) * cffD;
     		}
     		
         	commonD = cffD * csfD;
@@ -324,7 +332,7 @@ public class FracCalc {
     	} else {
     		reducedW = 0;
     	}
-    	
+    	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
     	if (reducedW < 0) {
     		reducedN *= -1;
     	}
@@ -332,6 +340,7 @@ public class FracCalc {
     		reducedN *= -1;
     	}
     	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
+    	
     	for (int i = reducedN; i > 0; i--) {
 			if((reducedN % i == 0) && (finalD % i == 0)) {
 				reducedN = reducedN / i;
@@ -341,9 +350,10 @@ public class FracCalc {
 			}
 		}
     	
-    	if (finalN < 0) {
+    	if (finalN < 0 && reducedN >= 0 && reducedW == 0) {
     		reducedN *= -1;
     	}
+    	
     	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
 	
     	if (reducedW == 0) {		//if there are no whole numbers
@@ -358,6 +368,7 @@ public class FracCalc {
     	
     	return answer;
     }
+
     
     public static String mult(int cffW, int cffN, int cffD, int csfW, int csfN, int csfD) {
     	String answer = " ";
@@ -374,6 +385,12 @@ public class FracCalc {
     	int newffD = 1;
     	int newsfD = 1;
     	int commonD = 1;
+    	
+    	if (cffN == 0 && csfN ==0) {
+    		finalW = cffW * csfW;
+    		answer = Integer.toString(finalW);
+    		return answer;
+    	}
     	
     	if (cffN != 0 && csfN != 0) {		//both have fractions
     		
@@ -407,7 +424,7 @@ public class FracCalc {
     		if (csfW >= 0) {
     			newsfN = ((csfW * csfD) + csfN);
     		} else {
-    			newsfN = ((csfW * csfD) + csfN);
+    			newsfN = ((csfW * csfD) - csfN);
     		}
     		
     		newffN = cffW;
@@ -460,9 +477,7 @@ public class FracCalc {
 			}
 		}
     	
-    	if (finalN < 0) {
-    		reducedN *= -1;
-    	}
+    	
     	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
     	
 	
@@ -487,13 +502,18 @@ public class FracCalc {
     	
     	int reducedW = 0;
     	int reducedN = 0;
-    	int reducedD = 0;
+    	int reducedD = 1;
     	
     	int newffN = 0;
     	int newsfN = 0;
     	int newffD = 0;
     	int newsfD = 0;
     	int commonD = 0;
+    	
+    	if (cffN == 0 && cffW == 0) {
+    		answer = Integer.toString(0);
+    		return answer;
+    	}
     	
     	if (cffN != 0 && csfN != 0) {		//both have fractions
     		
@@ -551,14 +571,15 @@ public class FracCalc {
     	if (newffN != 0 && newsfN != 0) {
     		finalN = (newffN * newsfD) ;
     		finalD = commonD;
-    	}
-    	if (newffN != 0 && newsfN == 0) {
+    	} else if (newffN != 0 && newsfN == 0) {
     		finalN = newffN;
     		finalD = commonD;
-    	}
-    	if (newffN == 0 && newsfN != 0) {
+    	} else if (newffN == 0 && newsfN != 0) {
     		finalN = newsfN;
     		finalD = commonD;
+    	} else {
+    		finalN = cffW;
+    		finalD = csfW;
     	}
 
     	System.out.println("finalN and finalD: " + finalN + " " + finalD);
@@ -578,6 +599,9 @@ public class FracCalc {
     	if (reducedW >= 0 && reducedN < 0) {
     		reducedN *= -1;
     	}
+    	if(reducedW != 0 && reducedN < 0) {
+    		reducedN *= -1;
+    	}
     	System.out.println("reducedW and reducedN: " + reducedW + " " + reducedN);
     	for (int i = reducedN; i > 0; i--) {
 			if((reducedN % i == 0) && (finalD % i == 0)) {
@@ -595,6 +619,11 @@ public class FracCalc {
     	if (finalN < 0 && reducedN >= 0 && reducedW == 0) {
     		reducedN *= -1;
     	}
+    	if (finalD < 0 && reducedN >= 0 && reducedW == 0) {
+    		reducedN *= -1;
+    	}
+    	
+    	
     	System.out.println("reducedN and reducedD: " + reducedN + " " + reducedD);
     	
 
@@ -628,6 +657,12 @@ public class FracCalc {
 //        
 // The function should return the result of the fraction after it has been calculated
 //      e.g. return ==> "1_1/4"
+
+
+
+
+
+
 
 
 
