@@ -313,7 +313,7 @@ public class FracCalc {
     	
     	finalN = newffN - newsfN;
     	finalD = commonD;
-    	System.out.println("newffN newsfN finalN commonD: " + newffN + " " + newsfN + " " + finalN + " " + commonD);
+    	
     	//in this space convert fraction back into a mixed number
 
     	if (finalD != 0) {
